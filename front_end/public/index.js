@@ -1,7 +1,8 @@
 let container = document.getElementById('container');
-let bestWeight = document.getElementById('bests');
+let bestWeightBtn = document.getElementById('bests');
+let updateBtn = document.getElementById('update');
 
-
+// shows all current workouts and personal bests
 function displayWorkouts() {
   container.innerHTML = '';
   fetch('http://localhost:8005/api/workouts')
@@ -15,4 +16,47 @@ function displayWorkouts() {
     })
 }
 
-bests.addEventListener('click', displayWorkouts);
+function updateBest() {
+  container.innerHTML = '';
+  let workoutInput = document.createElement('input');
+  let weightInput = document.createElement('input');
+  let repInput = document.createElement('input');
+  let submitButton = document.createElement('button')
+  container.append(workoutInput, weightInput, repInput, submitButton);
+
+  workoutInput.placeholder = 'Workout Name:';
+  workoutInput.id = 'workoutInput';
+
+  weightInput.placeholder = 'New best weight:';
+  weightInput.id = 'weightInput';
+
+  repInput.placeholder = 'Number of reps:';
+  repInput.id = 'repInput';
+
+  submitButton.innerText = 'Submit';
+
+  let updatedData = {
+    best_weight: null,
+    rep_number: null
+  }
+
+  function makeChanges() {
+    fetch(`http://localhost:8005/api/workouts/update/${workoutInput.value}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedData)
+    })
+  }
+  submitButton.addEventListener('click', () => {
+    updatedData.best_weight = parseInt(weightInput.value);
+    updatedData.rep_number = parseInt(repInput.value);
+    makeChanges();
+    alert('Workout Updated!')
+  });
+}
+
+bestWeightBtn.addEventListener('click', displayWorkouts);
+updateBtn.addEventListener('click', updateBest);
+

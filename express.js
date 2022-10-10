@@ -24,3 +24,13 @@ app.get('/api/workouts', (req, res) => {
       res.status(200).send(result.rows)
     })
 })
+
+app.patch('/api/workouts/update/:name', (req, res) => {
+  let workoutName = req.params.name;
+  let weight = req.body.best_weight
+  let reps = req.body.rep_number
+  client.query("UPDATE workouts SET best_weight = $1, rep_number = $2 WHERE workout_name = $3", [weight, reps, workoutName])
+    .then(result => {
+      res.status(200).send("Workout updated.")
+    })
+})
