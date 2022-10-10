@@ -1,6 +1,7 @@
 let container = document.getElementById('container');
 let bestWeightBtn = document.getElementById('bests');
 let updateBtn = document.getElementById('update');
+let deleteBtn = document.getElementById('delete');
 
 // shows all current workouts and personal bests
 function displayWorkouts() {
@@ -16,7 +17,8 @@ function displayWorkouts() {
     })
 }
 
-function updateBest() {
+// populates input boxes and submit button
+function populateUpdate() {
   container.innerHTML = '';
   let workoutInput = document.createElement('input');
   let weightInput = document.createElement('input');
@@ -40,6 +42,7 @@ function updateBest() {
     rep_number: null
   }
 
+  // updates data for workout
   function makeChanges() {
     fetch(`http://localhost:8005/api/workouts/update/${workoutInput.value}`, {
       method: "PATCH",
@@ -57,6 +60,29 @@ function updateBest() {
   });
 }
 
+// populates input box and delete button
+function populateDelete() {
+  container.innerHTML = '';
+  let workoutInput = document.createElement('input');
+  let deleteButton = document.createElement('button')
+  container.append(workoutInput, deleteButton)
+
+  deleteButton.innerText = "Delete";
+  workoutInput.placeholder = "Workout Name:"
+
+  function deleteWorkout() {
+    fetch(`http://localhost:8005/api/workouts/delete/${workoutInput.value}`, {
+      method: "DELETE"
+    })
+  }
+  deleteButton.addEventListener('click', () => {
+    deleteWorkout();
+    alert("Workout Deleted.")
+  })
+}
+
+// event listeners for buttons
 bestWeightBtn.addEventListener('click', displayWorkouts);
-updateBtn.addEventListener('click', updateBest);
+updateBtn.addEventListener('click', populateUpdate);
+deleteBtn.addEventListener('click', populateDelete);
 
