@@ -45,7 +45,7 @@ app.delete('/api/workouts/delete/:name', (req, res) => {
 
 app.post('/api/workouts/add', (req, res) => {
   let workoutBody = req.body;
-  client.query("INSERT INTO workouts (workout_name, best_weight, rep_number) VALUES ($1, $2, $3)", [workoutBody.workout_name, workoutBody.best_weight, workoutBody.rep_number])
+  client.query("INSERT INTO workouts (workout_name, best_weight, rep_number) VALUES ($1, $2, $3)", [`${workoutBody.workout_name}`, workoutBody.best_weight, workoutBody.rep_number])
     .then(result => {
       res.status(201).send('Workout added.')
     })

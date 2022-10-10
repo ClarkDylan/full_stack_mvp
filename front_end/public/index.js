@@ -2,6 +2,7 @@ let container = document.getElementById('container');
 let bestWeightBtn = document.getElementById('bests');
 let updateBtn = document.getElementById('update');
 let deleteBtn = document.getElementById('delete');
+let addBtn = document.getElementById('add')
 
 // shows all current workouts and personal bests
 function displayWorkouts() {
@@ -35,7 +36,7 @@ function populateUpdate() {
   repInput.placeholder = 'Number of reps:';
   repInput.id = 'repInput';
 
-  submitButton.innerText = 'Submit';
+  submitButton.innerText = 'Update Workout';
 
   let updatedData = {
     best_weight: null,
@@ -81,8 +82,52 @@ function populateDelete() {
   })
 }
 
+function populateAdd() {
+  container.innerHTML = '';
+  let workoutInput = document.createElement('input');
+  let weightInput = document.createElement('input');
+  let repInput = document.createElement('input');
+  let submitButton = document.createElement('button')
+  container.append(workoutInput, weightInput, repInput, submitButton);
+
+  workoutInput.placeholder = 'Workout Name:';
+  workoutInput.id = 'workoutInput';
+
+  weightInput.placeholder = 'New best weight:';
+  weightInput.id = 'weightInput';
+
+  repInput.placeholder = 'Number of reps:';
+  repInput.id = 'repInput';
+
+  submitButton.innerText = 'Add Workout';
+
+  let newWorkout = {
+    "workout_name": null,
+    "best_weight": null,
+    "rep_number": null
+  }
+
+  function addWorkout() {
+    fetch('http://localhost:8005/api/workouts/add', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newWorkout)
+    })
+  }
+  submitButton.addEventListener('click', () => {
+    newWorkout.workout_name = workoutInput.value;
+    newWorkout.best_weight = parseInt(weightInput.value);
+    newWorkout.rep_number = parseInt(repInput.value);
+    addWorkout();
+    alert(`You are now tracking ${workoutInput.value}`)
+  })
+}
+
 // event listeners for buttons
 bestWeightBtn.addEventListener('click', displayWorkouts);
 updateBtn.addEventListener('click', populateUpdate);
 deleteBtn.addEventListener('click', populateDelete);
+addBtn.addEventListener('click', populateAdd);
 
