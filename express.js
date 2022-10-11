@@ -7,10 +7,12 @@ app.use(cors());
 
 const config = require('./config.js')[process.env.NODE_ENV || "production"]
 const PORT = config.port;
+console.log(PORT)
 
 const client = new Client({
   connectionString: config.connectionString
 });
+console.log(config.connectionString)
 
 client.connect();
 

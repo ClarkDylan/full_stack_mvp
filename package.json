@@ -2,7 +2,7 @@
   "name": "full_stack_mvp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "express.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:production": "node express.js"
