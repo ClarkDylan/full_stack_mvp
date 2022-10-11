@@ -14,13 +14,13 @@ dateDisplay.innerText = `Today is ${dateFormat}`;
 function displayWorkouts() {
   container.innerHTML = '';
   container.style.backgroundColor = 'white';
-  fetch('https://workout-tracker-kdyx.onrender.com/api/workouts'), {
+  fetch('https://workout-tracker-kdyx.onrender.com/api/workouts', {
     method: "GET",
     mode: "cors",
     headers: {
       "Content-Type": "application/json"
     }
-  }
+  })
     .then(data => data.json())
     .then(workouts => {
       workouts.forEach(workout => {
