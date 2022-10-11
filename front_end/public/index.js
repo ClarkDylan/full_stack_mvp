@@ -1,17 +1,25 @@
-let container = document.getElementById('container');
+let container = document.getElementById('resultsContainer');
 let bestWeightBtn = document.getElementById('bests');
 let updateBtn = document.getElementById('update');
 let deleteBtn = document.getElementById('delete');
-let addBtn = document.getElementById('add')
+let addBtn = document.getElementById('add');
+let dateDisplay = document.getElementById('date');
+
+let date = new Date();
+const dateFormat = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+
+dateDisplay.innerText = `Today is ${dateFormat}`;
 
 // shows all current workouts and personal bests
 function displayWorkouts() {
   container.innerHTML = '';
+  container.style.backgroundColor = 'white';
   fetch('http://localhost:8005/api/workouts')
     .then(data => data.json())
     .then(workouts => {
       workouts.forEach(workout => {
         let nextWorkout = document.createElement('div');
+        nextWorkout.id = 'workoutCard'
         nextWorkout.innerText = `${workout.workout_name} \n Personal Best Weight: ${workout.best_weight} \n Number of Reps: ${workout.rep_number}`
         container.append(nextWorkout);
       })
@@ -21,6 +29,7 @@ function displayWorkouts() {
 // populates input boxes and submit button
 function populateUpdate() {
   container.innerHTML = '';
+  container.style.backgroundColor = 'white';
   let workoutInput = document.createElement('input');
   let weightInput = document.createElement('input');
   let repInput = document.createElement('input');
@@ -58,12 +67,14 @@ function populateUpdate() {
     updatedData.rep_number = parseInt(repInput.value);
     makeChanges();
     alert('Workout Updated!')
+    prompt('this');
   });
 }
 
 // populates input box and delete button
 function populateDelete() {
   container.innerHTML = '';
+  container.style.backgroundColor = 'white';
   let workoutInput = document.createElement('input');
   let deleteButton = document.createElement('button')
   container.append(workoutInput, deleteButton)
@@ -84,6 +95,7 @@ function populateDelete() {
 
 function populateAdd() {
   container.innerHTML = '';
+  container.style.backgroundColor = 'white';
   let workoutInput = document.createElement('input');
   let weightInput = document.createElement('input');
   let repInput = document.createElement('input');
@@ -130,4 +142,3 @@ bestWeightBtn.addEventListener('click', displayWorkouts);
 updateBtn.addEventListener('click', populateUpdate);
 deleteBtn.addEventListener('click', populateDelete);
 addBtn.addEventListener('click', populateAdd);
-

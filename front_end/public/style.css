@@ -1,0 +1,121 @@
+h1 {
+  font-size: 3em;
+  text-shadow: 2px -2px 3px #d55815;
+}
+
+img {
+  width: 8em;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  width: 90vw;
+  background-color: #86bbd8;
+  font-family: 'Jost', sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  height: auto;
+  background-color: #33658a;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  padding: 15px 25px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  align-items: center;
+}
+
+#resultsContainer {
+  display: inline-flex;
+  border-radius: 10px;
+  padding: 15px 25px;
+  width: 50%;
+  height: fit-content;
+  text-align: center;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#workoutCard {
+  box-shadow: 0 0 10px 0 #f26419;
+  border: 1px solid #f26419;
+  border-radius: inherit;
+  padding: 4px;
+  width: fit-content;
+  min-width: 10em;
+  margin: 20px;
+  display: inline-flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+input {
+  border-color: #f26419;
+  width: 7.5em;
+  height: 2em;
+  margin-right: 1em;
+  flex-direction: column;
+  padding: 6px 10px;
+  border-radius: 12px;
+}
+
+input:focus {
+  border-color: #d55815;
+  box-shadow: 0 0 10px 0 #f26419;
+  transition: box-shadow .3s ease-out;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+#buttonContainer {
+  display: flex;
+  flex-direction: column;
+  float: left;
+}
+
+button {
+  background-color: #f6ae2d;
+  border-radius: 10px;
+  padding: 10px 15px;
+  border-color: #f26419;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  box-shadow: 1px 5px 5px #d55815;
+  cursor: pointer;
+  transition: box-shadow 200ms ease-in-out;
+}
+
+main {
+  display: flex;
+  flex: 2 1;
+}
+
+a.links {
+  color: white;
+  text-shadow: 2px -2px 3px #d55815;
+  border: 2px solid white;
+  border-radius: 12px;
+  padding: 5px;
+  text-decoration: none;
+}
+
+a.links:hover {
+  background-color: #f26419;
+  box-shadow: 0 0 10px 0 #f26419;
+  transition: box-shadow 200ms ease-in;
+  transition: background-color 200ms ease-in;
+}
