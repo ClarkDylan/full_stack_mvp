@@ -14,7 +14,13 @@ dateDisplay.innerText = `Today is ${dateFormat}`;
 function displayWorkouts() {
   container.innerHTML = '';
   container.style.backgroundColor = 'white';
-  fetch('https://workout-tracker-kdyx.onrender.com/api/workouts')
+  fetch('https://workout-tracker-kdyx.onrender.com/api/workouts'), {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
     .then(data => data.json())
     .then(workouts => {
       workouts.forEach(workout => {
@@ -56,6 +62,7 @@ function populateUpdate() {
   function makeChanges() {
     fetch(`https://workout-tracker-kdyx.onrender.com/api/workouts/update/${workoutInput.value}`, {
       method: "PATCH",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json"
       },
@@ -84,7 +91,8 @@ function populateDelete() {
 
   function deleteWorkout() {
     fetch(`https://workout-tracker-kdyx.onrender.com/api/workouts/delete/${workoutInput.value}`, {
-      method: "DELETE"
+      method: "DELETE",
+      mode: "cors"
     })
   }
   deleteButton.addEventListener('click', () => {
@@ -122,6 +130,7 @@ function populateAdd() {
   function addWorkout() {
     fetch('https://workout-tracker-kdyx.onrender.com/api/workouts/add', {
       method: "POST",
+      mode: "cors",
       headers: {
         'Content-Type': 'application/json'
       },
